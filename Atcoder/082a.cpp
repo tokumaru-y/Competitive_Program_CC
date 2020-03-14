@@ -1,11 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 int main () {
-    char s[3];
-    scanf("%s", s);
-    int ans =0;
-    for(int i = 0;i<3;i++){
-        if (s[i] == '1') ans++;
+    int a,b;
+    scanf("%d %d", &a,&b);
+    int s = a+b;
+    int div=s/2;
+    if (div*2 == s){
+        printf("%d",div);
+    } else {
+        printf("%d", div+1);
     }
-    printf("%d", ans);
 }
