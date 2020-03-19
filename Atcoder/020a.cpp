@@ -3,8 +3,8 @@ using namespace std;
 int main () {
     int n;scanf("%d",&n);
     if(n==1){
-        printf("ABC");
+        printf("ABC\n");
     } else {
-        printf("chokudai");
+        printf("chokudai\n");
     }
 }
