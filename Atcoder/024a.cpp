@@ -8,5 +8,5 @@ int main () {
     if(s+t>=k){
         ans -= (s+t)*c;
     }
-    printf("%d",ans);
+    printf("%d\n",ans);
 }
