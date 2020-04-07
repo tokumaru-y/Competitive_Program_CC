@@ -1,3 +1,4 @@
+//http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_B&lang=ja
 #include <bits/stdc++.h>
 #define FOR(i,a,b) for(int )= (a); i<(b); i++)
 #define REP(i,n) for(int i=0;i < (n);i++)
