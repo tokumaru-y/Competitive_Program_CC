@@ -1,4 +1,3 @@
-//https://atcoder.jp/contests/pakencamp-2019-day3/tasks/pakencamp_2019_day3_c
 #include <bits/stdc++.h>
 #define FOR(i,a,b) for(int i= (a); i<(b); i++)
 #define REP(i,n) for(int i=0;i < (n);i++)
@@ -21,24 +20,22 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 signed main () {
-    int n,m;scanf("%d %d",&n,&m);
-    vector<vector<ll>> list(n);
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            ll tmp;scanf("%lld",&tmp);
-            list[i].push_back(tmp);
+    int a,b,c,x,y;scanf("%d %d %d %d %d",&a,&b,&c,&x,&y);
+    int ans = 0;
+    if(a+b>2*c){
+        if(x<y){
+            int tmp = 0;
+            int left = y - x;
+            ans += 2*c*x;
+            ans += min(left*b,2*c*left);
+        } else {
+            int tmp = 0;
+            int left = x - y;
+            ans += 2*c*y;
+            ans += min(left*a,2*c*left);
         }
+    } else {
+        ans = a*x + b*y;
     }
-    ll ans=0;
-    for(int j=0;j<m-1;j++){
-        for(int k=j+1;k<m;k++){
-            ll tmp=0;
-            for(int i=0;i<n;i++){
-                tmp += max(list[i][j],list[i][k]);
-                //printf("%lld %lld",list[i][j],list[i][k]);
-            }
-            ans = max(tmp,ans);
-        }
-    }
-    printf("%lld",ans);
+    printf("%d",ans);
 }
