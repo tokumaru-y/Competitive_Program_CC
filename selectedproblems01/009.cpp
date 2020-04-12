@@ -21,21 +21,33 @@ vector<long long> divisor(long long n) {
 }
 signed main () {
     int n;scanf("%d",&n);
-    vector<int> x(n); vector<int> y(n);
-    REP(i,n){
-        int a,b;scanf("%d %d",&a,&b);
-        x[i] = a;y[i] = b;
+    vector<int> xlist(n);vector<int> ylist(n);
+    vector<vector<bool>> list(1000001,vector<bool>(1000001,false));
+    for(int i=0;i<n;i++){
+        int tmpx,tmpy;scanf("%d %d",&tmpx,&tmpy);
+        xlist[i]=tmpx;ylist[i]=tmpy;
+        list[tmpx][tmpy] = false;
     }
     int m;scanf("%d",&m);
-    vector<int> candx(m);vector<int> candy(m);
-    REP(i,m){
-        int a,b;scanf("%d %d",&a,&b);
-        candx[i] = a;candy[i] = b;
+    vector<vector<bool>> candi(1000001,vector<bool>(1000001,false));
+    vector<int> candix(m);vector<int> candiy(m);
+    for(int i=0;i<m;i++){
+        int tmpx,tmpy;scanf("%d %d",&tmpx,&tmpy);
+        candix[i] = tmpx;candiy[i] = tmpy;
+        candi[tmpx][tmpy]=true;
     }
     int ansx,ansy;
-    REP(i,n){
-        REP(j,m){
-            
+    for(int i=0;i<m;i++){
+        int nowx=xlist[i];int nowy=ylist[i];
+        for(int j=0;j<n;j++){
+            int difx = nowx - candix[j]; int dify = nowy - candiy[j];
+            for(int k = 0;k<n;k++){
+                if(k==j){
+                    continue;
+                } else if (not (candix[xlist[k] + difx] && candiy[ylist[k] + dify]) ) {
+                    break;
+                }
+            }
         }
     }
 }
