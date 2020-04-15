@@ -31,7 +31,8 @@ int dfs(int i,int j, int& cnt){
         if(x<0 || x >=h || y < 0 || y >= w)continue;
         if(grid[x][y]==1 && !seen[x][y]){
             seen[x][y] = true;
-            res = dfs(x,y,cnt);
+            res = max(res,dfs(x,y,cnt));
+            seen[x][y] = false;
         }
     }
     cnt--;
