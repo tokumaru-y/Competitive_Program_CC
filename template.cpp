@@ -19,6 +19,8 @@ vector<long long> divisor(long long n) {
     //sort(ret.begin(), ret.end()); // 昇順に並べる
     return ret;
 }
+vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
+
 signed main () {
 
 }
