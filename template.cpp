@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define FOR(i,a,b) for(int i= (a); i<(b); i++)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
 #define REP(i,n) for(int i=0;i < (n);i++)
 #define ALL(obj) (obj).begin(),(obj).end()
 using namespace std;
