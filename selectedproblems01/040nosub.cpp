@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define REP(i,n) for(int i=0;i < (n);i++)
+#define ALL(obj) (obj).begin(),(obj).end()
+using namespace std;
+
+const long long INF = 1LL << 60;
+const int MOD = (int)1e9 + 7;
+typedef long long ll;
+//約数列挙
+vector<long long> divisor(long long n) {
+    vector<long long> ret;
+    for (long long i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            ret.push_back(i);
+            if (i * i != n) ret.push_back(n / i);
+        }
+    }
+    //sort(ret.begin(), ret.end()); // 昇順に並べる
+    return ret;
+}
+vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
+
+signed main () {
+    int n,m;scanf("%d %d",&n,&m);
+    vector<vector<int>> dp(n+1,vector<int>(3,0));
+    vector<int> menu(n,-1);
+    REP(i,m){
+        int a,b;scanf("%d %d",&a,&b);
+        menu[a-1] = b-1;
+    }
+    REP(i,n){
+        REP(j,3){
+            if(menu[i] != -1){
+                if(menu[i] != j){
+                    dp[i+1][j] = 0;
+                } else {
+                    REP(k,3){
+                        if(j==k)continue;
+                        dp[i+1][j]+= dp[i][k];
+                    }
+                }
+            } else {
+                REP(k,3){
+                    if(j==k)continue;
+                    dp[i+1][j] += dp[i][k];
+                }
+            }
+        }
+    }
+}
