@@ -5,6 +5,7 @@
 using namespace std;
 
 const long long INF = 1LL << 60;
+const int IINF=100000000;
 const int MOD = (int)1e9 + 7;
 typedef long long ll;
 //約数列挙
