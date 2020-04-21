@@ -23,6 +23,14 @@ vector<long long> divisor(long long n) {
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
-signed main () {
 
+signed main () {
+    SCANF(n);
+    vector<vector<int>> list(n,vector<int>(n));
+    REP(i,n){
+        REP(j,n){
+            SCANF(tmp);
+            list[i][j]=tmp;
+        }
+    }
 }
