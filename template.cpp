@@ -3,7 +3,7 @@
 #define REP(i,n) for(int i=0;i < (n);i++)
 #define ALL(obj) (obj).begin(),(obj).end()
 using namespace std;
-
+using P = pair<int,int>;
 const long long INF = 1LL << 60;
 const int IINF=100000000;
 const int MOD = (int)1e9 + 7;
