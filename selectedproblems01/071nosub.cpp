@@ -23,17 +23,38 @@ vector<long long> divisor(long long n) {
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
-ll modpow(ll n,ll m,ll mod){
+ll modpow(ll a, ll x, ll mod){
     ll res = 1;
-    while(m>0){
-        if(m & 1)res = res * n % mod;
-        n = n * n % mod;
-        m >>= 1;
+    while(x>0){
+        if(x&1)res = res * a % mod;
+        a = a * a % mod;
+        x >>= 1;
     }
     return res;
 };
 signed main () {
-    ll n,m;scanf("%lld %lld",&n,&m);ll mod = 1000000007;
-    ll ans = modpow(n,m,mod);
+    int n,m;scanf("%d %d",&n,&m);
+    vector<int> city(n);vector<int> list(m);
+    REP(i,n){
+        SCANF(tmp);
+        city[i]=tmp;
+    }
+    REP(i,m){
+        SCANF(tmp);
+        list[i]=tmp;
+    }
+    ll ans = 0 ; ll mod = 1000000007;
+    vector<ll> dist(n+1,0);
+    for(int h=1;h<=n;h++){
+        dist[h] = dist[h-1] + modpow(city[h-1],city[h],mod);
+    }
+    int now = 0;
+    REP(i,m){
+        int from = now;int to = list[i];
+        now=to;
+        if(from>to)swap(from,to);
+        ans += dist[to] - dist[from];
+    }
+    ans += dist[now];
     printf("%lld\n",ans);
 }
