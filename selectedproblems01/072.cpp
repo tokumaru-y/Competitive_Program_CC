@@ -22,8 +22,30 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
-
+ll extgcd(ll a, ll m) {
+    long long b = m, u = 1, v = 0;
+    while (b) {
+        long long t = a / b;
+        a -= t * b; swap(a, b);
+        u -= t * v; swap(u, v);
+    }
+    u %= m; 
+    if (u < 0) u += m;
+    return u;
+}
+ll roop(ll x,ll m){
+    ll cnt = 0;ll res = 1;
+    while(x>0){
+        res *= x;
+        res %= m;
+        x--;
+    }
+    return res;
+}
 signed main () {
     int h,w;scanf("%d %d",&h,&w);
-    
+    ll mod = 1000000007;
+    ll a=roop(h+w-2,mod),b=roop(h-1,mod),c=roop(w-1,mod);
+    ll div = extgcd(b*c,mod);
+    printf("%lld\n",(a*div)%mod);
 }
