@@ -46,20 +46,17 @@ ll roop(ll x,ll m){
 
 signed main () {
     ll x,y;scanf("%lld %lld",&x,&y);
-    ll mod = 100000007;
+    ll mod = 1000000007;
     if((x+y)%3!=0)printf("0\n"),exit(0);
-    if(x<y)swap(x,y);
-    ll one=0;ll two=x/2;
-    ll cnt =two;
-    if(x%2==1)one++;
-    int i;
-    for(i=0;i<=cnt;i++){
-        if((1*two) + (2*one)==y)break;
-        two--;one++;
+    ll one=(x+y)/3;ll two=0;
+    for(int i=0;i<=(x+y)/3;i++){
+        if(one+2*two==x)break;
+        one--;two++;
     }
+    if(one<0)printf("0\n"),exit(0);
     ll a=roop(one+two,mod);ll b=roop(one,mod);ll c=roop(two,mod);
-    ll div= extgcd(b*c,mod);
-    cout << a << ' ' << div << endl;
-    cout << mod << endl;
+    ll div= extgcd((b*c),mod);
+    //cout << one << ":" << two << endl;
+    //cout << a << " " << b << " " << c <<  endl;
     printf("%lld\n",(a*div)%mod);
 }
