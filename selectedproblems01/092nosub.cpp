@@ -23,57 +23,44 @@ vector<long long> divisor(long long n) {
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
-signed main () {
+signed main(){
     int h;
-    while(cin >> h){
+    while(cin>>h){
         if(h==0)break;
         vector<vector<int>> list(h,vector<int>(5));
-        REP(i,h){
-            REP(j,5){
-                cin >> list[i][j];
-            }
-        }
-        ll ans =0;bool flag = true;
-        while(flag){
-            ll stmp = 0;
-            vector<vector<bool>> l(h,vector<bool>(5,false));
+        ll ans=0;bool roopflag=true;
+        REP(i,h)REP(j,5)cin >> list[i][j];
+
+        while(true){
+            roopflag=false;
             REP(i,h){
-                int t=0;int cnt =0;
                 REP(j,3){
-                    if(list[i][j]!=0 && !l[i][j] && list[i][j] == list[i][j+1] && list[i][j+1] == list[i][j+2]){
-                        t=list[i][j];
-                        FOR(k,j,5){
-                            if(!l[i][k]){
-                                cnt++;l[i][k]=true;
-                            }
+                    if(list[i][j] != 0 && list[i][j] == list[i][j+1] && list[i][j+1]==list[i][j+2]){
+                        roopflag=true;
+                        int cnt =3;int num = list[i][j];
+                        FOR(k,j+3,5){
+                            if(list[i][j]==list[i][k])cnt++;
+                            else break;
                         }
+                        //cout << cnt << endl;
+                        FOR(d,j,j+cnt)list[i][d]=0;
+                        ans+=cnt*num;
                     }
                 }
-                stmp+=t*cnt;
             }
-            for(int i=h-1;i>=0;i--){
-                REP(j,5){
-                    if(l[i][j]){
-                        if(i==0){
-                            list[i][j]=0;
-                        } else {
-                            list[i][j] = list[i-1][j];
-                            l[i-1][j]=true;
-                            for(int k=i-1;i>=0;k--){
-                                if(l[k][j]){
-                                    l[k][j]=true;
-                                } else {
-                                    list[i][j]=list[k][j];
-                                    l[k][j]=true;
-                                    break;
-                                }
+            if(!roopflag)break;
+            for(int i=h-1;i>0;i--){
+                for(int j=0;j<5;j++){
+                    if(list[i][j]==0){
+                        for(int q=i-1;q>=0;q--){
+                            if(list[q][j]!=0){
+                                swap(list[i][j],list[q][j]);
+                                break;
                             }
                         }
                     }
                 }
             }
-            ans += stmp;
-            if(!stmp)break;
         }
         printf("%lld\n",ans);
     }
