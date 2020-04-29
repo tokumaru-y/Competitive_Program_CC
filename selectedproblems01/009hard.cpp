@@ -24,14 +24,33 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    int n,w,h;
-    while(cin >> n >> w >> h){
-        if(n+w+h==0)break;
-        priority_queue<int> ans;
-        vector<vector<int>> list(h,vector<int>(w,0));
-        REP(i,n){
-            ll tmp;scanf("%lld",&tmp);
-            
+    int m;scanf("%d",&m);
+    vector<P> list(m);
+    REP(i,m){
+        int a,b;scanf("%d %d",&a,&b);
+        P tmp = make_pair(a,b);
+        list[i]=tmp;
+    }
+    int n;scanf("%d",&n);
+    vector<P> list2(n);
+    map<P,bool> mm;
+    REP(i,n){
+        int a,b;scanf("%d %d",&a,&b);
+        list2[i]=make_pair(a,b);
+        mm[P(a,b)]=true;
+    }
+    P tmp =list[0];int tx = tmp.first;int ty = tmp.second;
+    REP(i,n){
+        P tt = list2[i];
+        int xdiff=tt.first-tx;int ydiff=tt.second-ty;
+        bool flag=true;
+        REP(i,m){
+            P ttt=list[i];int mx=ttt.first;int my = ttt.second;
+            flag &= mm[P(mx+xdiff,my+ydiff)];
+        }
+        if(flag){
+            printf("%d %d\n",xdiff,ydiff);
+            exit(0);
         }
     }
 }
