@@ -19,6 +19,68 @@ vector<long long> divisor(long long n) {
     //sort(ret.begin(), ret.end()); // 昇順に並べる
     return ret;
 }
+int n;
+vector<vector<int>> board(8,vector<int>(8,0));
+
+void change(vector<vector<int>> &board,int h,int w,int num){
+    REP(i,8){
+        board[h][i]+=num;board[i][w]+=num;
+    }
+    board[h][w]-=num*3;
+    //右上
+    for(int i=h-1;i>=0;i--){
+        if(h-i+w<0 || h-i+w>7)continue;
+        board[i][h-i+w]+=num;
+    }
+    //右下
+    for(int i=h+1;i<=7;i++){
+        if(h-i+w<0 || h-i+w>7)continue;
+        board[i][h-i+w]+=num;
+    }
+    //左上
+    for(int i=h-1;i>=0;i--){
+        if(w-(h-i)<0 || w-(h-i)>7)continue;
+        board[i][w-(h-i)]+=num;
+    }
+    //左下
+    for(int i=h+1;i<=7;i++){
+        if(w-(h-i)<0 || w-(h-i)>7)continue;
+        board[i][w-(h-i)]+=num;
+    }
+}
+
+void setqueen(int q,vector<int>queen,vector<vector<int>>board){
+    if(q==8){
+        REP(i,8){
+            int h=queen[i];
+            char ans[]="........";
+            ans[h]='Q';
+            cout << ans << endl;
+        }
+        exit(0);
+    }
+    if(queen[q]!=-1){
+        setqueen(q+1,queen,board);
+    } else {
+        for(int i=0;i<8;i++){
+            if(board[q][i]<1){
+                queen[q]=i;
+                change(board,q,i,1);
+                setqueen(q+1,queen,board);
+                change(board,q,i,-1);
+            }
+        }
+    }
+}
+
 signed main () {
-    
+    scanf("%d",&n);
+    vector<int> queen(8,-1);
+    REP(i,n){
+        int a,b;scanf("%d %d",&a,&b);
+        //a--;b--;
+        queen[a]=b;
+        change(board,a,b,1);
+    }
+    setqueen(0,queen,board);
 }
