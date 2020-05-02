@@ -22,44 +22,54 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
+int dir[4]={1,0,1,0};//横、縦、横、縦
 int H,W;
-vector<vector<bool>> seen;vector<vector<int>> vertical;vector<vector<int>> horizon;
-bool check(int h,int w){
-    int nh=horizon[h][w];
-    if(w==0){
-        if(nh==0)return true;
+vector<vector<int>> seen;vector<vector<int>> vertical;vector<vector<int>> horizon;
+bool check(int h,int w,int d,int diff){
+    cout << "ssss" << endl;
+    cout << h << ' ' << w << endl;
+    //縦移動
+    if(d){
+        cout << h-diff << " " << w << endl;
+        cout << "tate" << endl;
+        if(vertical[h-diff][w]==0)return true;
         return false;
     } else {
-        if(nh==0&&vertical[h][w-1]==0)return true;
+        cout << h << " " << w-diff << endl;
+        cout << "yoko" << endl;
+        if(horizon[h][w-diff]==0)return true;
         return false;
     }
 }
-ll search(int h,int w,ll cnt){
+void search(int h,int w){
     REP(i,4){
-        int nh = h+dx[i];int nw = w+dy[i];
-        if(nh<0||nh>=H||nw<0||nw>=W)continue;
-        if(check(nh,nw)){
-            seen[nh][nw]=true;
-            search(nh,nw,cnt+1);
+        int nh = h+dx[i];int nw = w+dy[i];int d=dir[i];
+        if(nh<0||nh>=H||nw<0||nw>=W||seen[nh][nw]!=-1)continue;
+        if(check(nh,nw,d,dx[i]+dy[i])){
+            seen[nh][nw]=seen[h][w]+1;
+            search(nh,nw);
         }
     }
 }
 signed main () {
     while(cin >> W >> H){
         if(H+W==0)break;
-        seen.assign(H,vector<bool>(W,false));
-        vertical.assign(H,vector<int>(W-1));
-        horizon.assign(H-1,vector<int>(W));
+        seen.assign(H,vector<int>(W,-1));
+        horizon.assign(H,vector<int>(W-1));
+        vertical.assign(H-1,vector<int>(W));
+        int index=0;
         REP(i,(H*2)-1){
             if(i%2==0){
-                REP(j,W-1)cin >> vertical[i][j];
+                REP(j,W-1)cin >> horizon[index][j];
             } else {
-                REP(j,W)cin >> horizon[i-1][j];
+                REP(j,W)cin >> vertical[index][j];
+                index++;
             }
         }
-        ll ans;
-        seen[0][0]=true;
-        ans = search(0,0,1);
+        seen[0][0]=1;
+        search(0,0);
+        ll ans =0;
+        seen[H-1][W-1]==-1?ans =0:ans=seen[H-1][W-1];
         cout << ans << endl;
     }
 }

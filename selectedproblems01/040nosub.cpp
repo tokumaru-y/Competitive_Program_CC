@@ -23,29 +23,52 @@ vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
     int n,m;scanf("%d %d",&n,&m);
-    vector<vector<int>> dp(n+1,vector<int>(3,0));
-    vector<int> menu(n,-1);
+    vector<vector<int>>dp(n+1,vector<int>(3,0));
+    vector<int> menu(n,-1);ll mod=10000;
     REP(i,m){
         int a,b;scanf("%d %d",&a,&b);
-        menu[a-1] = b-1;
+        a--;b--;
+        menu[a]=b;
     }
-    REP(i,n){
-        REP(j,3){
-            if(menu[i] != -1){
-                if(menu[i] != j){
-                    dp[i+1][j] = 0;
-                } else {
-                    REP(k,3){
-                        if(j==k)continue;
-                        dp[i+1][j]+= dp[i][k];
-                    }
-                }
-            } else {
+    dp[0][0]=1;
+    REP(i,2){
+        if(menu[i]!=-1){
+            REP(j,3){
+                if(j!=menu[i])continue;
                 REP(k,3){
-                    if(j==k)continue;
-                    dp[i+1][j] += dp[i][k];
+                    dp[i+1][j]+=dp[i][k];
+                }
+            }
+        } else {
+            REP(j,3){
+                REP(k,3){
+                    dp[i+1][j]+=dp[i][k];
                 }
             }
         }
     }
+
+    FOR(i,2,n){
+        if(menu[i]!=-1){
+            REP(j,3){
+                if(j!=menu[i])continue;
+                REP(k,3){
+                    if(k==j)dp[i+1][j]+=dp[i][k]-dp[i-1][k];
+                    else dp[i+1][j]+=dp[i][k];
+                }
+            }
+        } else {
+            REP(j,3){
+                REP(k,3){
+                    if(k==j)dp[i+1][j]+=dp[i][k]-dp[i-1][k];
+                    else dp[i+1][j]+=dp[i][k];
+                }
+            }
+        }
+    }
+    REP(i,n+1){
+        REP(j,3)cout << dp[i][j];
+        cout << endl;
+    }
+    cout << *max_element(ALL(dp[n]))%mod << endl;
 }
