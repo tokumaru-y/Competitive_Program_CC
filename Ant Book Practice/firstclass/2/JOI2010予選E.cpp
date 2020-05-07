@@ -22,7 +22,45 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
-
+int n,w,h;vector<vector<char>> grid;
+int ans=0;
+void dfs(int x,int y,char target){
+    queue<tuple<int,int,int>> que;
+    que.push(make_tuple(x,y,0));
+    vector<vector<bool>> seen(h,vector<bool>(w,false));
+    seen[x][y]=true;
+    int nextx;int nexty;
+    while(!que.empty()){
+        tuple<int,int,int> tmp=que.front();que.pop();
+        int orix=get<0>(tmp);int oriy=get<1>(tmp);int tmpcnt = get<2>(tmp);
+        for(int i=0;i<4;i++){
+            int nx=orix+dx[i];int ny=oriy+dy[i];
+            if(nx<0 || nx>h-1 || ny<0 || ny>w-1)continue;
+            if(grid[nx][ny]==target){
+                ans+=tmpcnt+1;
+                queue<tuple<int,int,int>>().swap(que);
+                nextx=nx;nexty=ny;
+                break;
+            }
+            if(seen[nx][ny] || grid[nx][ny]=='X')continue;
+            seen[nx][ny]=true;
+            que.push(make_tuple(nx,ny,tmpcnt+1));
+        }
+    }
+    if(n==target-'0')return;
+    else dfs(nextx,nexty,target+1);
+}
 signed main () {
-
+    cin >> h >> w >> n;
+    grid.assign(h,vector<char>(w));
+    int sx,sy;
+    REP(i,h){
+        string tmp;cin >> tmp;
+        REP(j,w){
+            grid[i][j]=tmp[j];
+            if(grid[i][j]=='S')sx=i,sy=j;
+        }
+    }
+    dfs(sx,sy,'1');
+    cout << ans << endl;
 }
