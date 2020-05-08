@@ -24,5 +24,30 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-
+    int t;cin >> t;
+    int n,m;
+    cin >> n;
+    queue<P> que;
+    REP(i,n){
+        ll tmp;cin >> tmp;
+        que.push(make_pair(tmp,tmp+t));
+    }
+    cin >> m;
+    REP(i,m){
+        ll tmp;cin >> tmp;
+        bool yet=true;
+        while(!que.empty()){
+            P p = que.front();que.pop();
+            ll s=p.first;ll e=p.second;
+            if((tmp>=s && tmp <=e)){
+                yet=false;
+                break;
+            }
+        }
+        if(yet){
+            cout << "no" << endl;
+            exit(0);
+        }
+    }
+    cout << "yes" << endl;
 }
