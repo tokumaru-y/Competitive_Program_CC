@@ -24,5 +24,21 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    
+    int n,w,k;cin >> w;
+    cin >> n >> k;
+    vector<ll> width(n);vector<ll> cost(n);
+    REP(i,n)cin >> width[i] >> cost[i];
+    vector<vector<ll>> dp(k+1,vector<ll>(w+1,0));
+    for(int i=0;i<k;i++){
+        for(int s=0;s<n;s++){
+            for(int j=0;j<=w;j++){
+                ll ind = j-width[s];
+                if(ind>=0){
+                    dp[i+1][j]=max(dp[i+1][j],dp[i][ind]+cost[s]);
+                }
+                dp[i+1][j]=max(dp[i+1][j],dp[i][j]);
+            }
+        }
+    }
+    cout << *max_element(ALL(dp[k])) << endl;
 }
