@@ -24,7 +24,5 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    ll n,d;cin >> n >> d;
-    int numcnt[3]={0,0,0};//2,3,5の約数の個数
-
+    
 }
