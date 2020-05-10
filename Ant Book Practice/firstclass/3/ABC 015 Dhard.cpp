@@ -28,17 +28,17 @@ signed main () {
     cin >> n >> k;
     vector<ll> width(n);vector<ll> cost(n);
     REP(i,n)cin >> width[i] >> cost[i];
-    vector<vector<ll>> dp(k+1,vector<ll>(w+1,0));
-    for(int i=0;i<k;i++){
-        for(int s=0;s<n;s++){
-            for(int j=0;j<=w;j++){
-                ll ind = j-width[s];
+    vector<vector<vector<ll>>> dp(n+1,vector<vector<ll>>(w+1,vector<ll>(k+1,0)));
+    REP(i,n){
+        REP(j,w+1){
+            REP(s,k){
+                int ind=j-width[i];
                 if(ind>=0){
-                    dp[i+1][j]=max(dp[i+1][j],dp[i][ind]+cost[s]);
+                    dp[i+1][j][s+1]=max(dp[i+1][j][s+1],dp[i][ind][s]+cost[i]);
                 }
-                dp[i+1][j]=max(dp[i+1][j],dp[i][j]);
+                dp[i+1][j][s+1]=max({dp[i+1][j][s+1],dp[i][j][s],dp[i][j][s+1],dp[i+1][j][s]});
             }
         }
     }
-    cout << *max_element(ALL(dp[k])) << endl;
+    cout << *max_element(ALL(dp[n][w])) << endl;
 }
