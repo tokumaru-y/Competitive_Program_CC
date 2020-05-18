@@ -24,17 +24,13 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    string s,t;cin >> s >> t;
-    int len = s.length();
-    if(len+1!=t.length()){
-        cout << "No" << endl;
-        exit(0);
+    string s ;cin >> s;
+    int l=s.length();l--;
+    if(s[l]=='0' || s[l]=='6' || s[l]=='8' || s[l]=='1'){
+        cout << "pon" << endl;
+    } else if (s[l]=='3'){
+        cout << "bon" << endl;
+    } else {
+        cout << "hon" << endl;
     }
-    REP(i,len){
-        if(s[i]!=t[i]){
-            cout << "No" << endl;
-            exit(0);
-        }
-    }
-    cout << "Yes" << endl;
 }

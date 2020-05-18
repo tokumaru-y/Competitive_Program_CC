@@ -22,24 +22,40 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
+vector<ll> graph;
+vector<ll> start;vector<ll> finish;
+vector<ll> roots;
+ll ans ;
+ll roopcnt;ll startcnt;
+void dfs(int x,int cnt) {
+    ll nx = graph[x];
+    start[x]=cnt;
+    cnt++;
+    if(start[nx]>=0 && finish[nx]==-1){
+        startcnt=start[nx];
+        roopcnt=cnt - start[nx];
+        finish[nx]=cnt+1;
+        return;
+    }
+    roots.push_back(nx);
+    dfs(nx,cnt);
+    cnt++;
+    finish[x]=cnt;
+}
 
 signed main () {
-    ll n;cin >> n;
-    vector<ll> list;
-    REP(i,n){
-        ll a,b;cin >> a >> b;
-        list.push_back(a*b);
-    }
-    ll ans = n;
-    sort(ALL(list));
-    REP(i,n){
-        ll tmp = list[i];
-        auto index=lower_bound(ALL(list),-tmp);
-        auto ind = upper_bound(ALL(list),-tmp);
-        if(index!=list.end()){
-        ans += n-1-((ind-list.begin()) - (index-list.begin()));
-        ans %= MOD;
-        }
+    ll n,k;cin >> n >> k;
+    graph.resize(n);
+    start.assign(n,-1);finish.assign(n,-1);
+    REP(i,n){int tmp;cin >> tmp;graph[i]=tmp-1;}
+    roots.push_back(0);
+    dfs(0,0);
+    if(startcnt>=k){
+        ans = roots[k]+1;
+    } else {
+        ll left = k - (startcnt);
+        ll ind = left%roopcnt;
+        ans = roots[startcnt+ind]+1;
     }
     cout << ans << endl;
 }
