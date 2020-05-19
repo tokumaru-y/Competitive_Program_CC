@@ -24,14 +24,5 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    ll n,s,k;cin >> n >> s >> k;
-    vector<vector<ll>> dp(n+1,vector<ll>(s+1,0));
-    dp[0][0]=1;
-    REP(i,n){
-        REP(j,s+1){
-            dp[i+1][j]=dp[i][j-1]+dp[i][j];
-            dp[i+1][j]%=MOD;
-        }
-    }
+    
 }
-//https://yukicoder.me/problems/no/269
