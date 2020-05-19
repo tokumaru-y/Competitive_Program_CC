@@ -22,39 +22,48 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
-
-struct UF {
-    vector<int> par;
+struct UF { 
+    vector<int> par;vector<int> deepth;
     UF(int x) : par(x) {
         REP(i,x)par[i]=i;
+        deepth.assign(x,1);
     }
-    int root(int x){ 
+    int root(int x){
         if(x==par[x])return x;
-        return par[x] = root(par[x]);
+        return par[x]=root(par[x]);
     }
     void unite(int x,int y){
         int rx=root(x);int ry=root(y);
         if(rx==ry)return;
         par[rx]=ry;
+        deepth[ry]+=deepth[rx];
     }
     bool same(int x,int y){
         return root(x)==root(y);
     }
+    int deep(int x){
+        return deepth[x];
+    }
 };
 signed main () {
-    int n,q;cin >> n >> q;
-    UF tree(n);
-    REP(i,q){
-        int a,b,c;cin >> a >> b >> c;
-        if(a){
-            string ans;
-            if(tree.same(b,c))ans = "Yes";
-            else ans = "No";
-            cout << ans << endl;
-        } else {
-            tree.unite(b,c);
-        }
+    ll N,K,L;cin >> N >> K >> L;
+    UF roads(N);UF trains(N);
+    REP(i,K){
+        int a,b;
+        cin >> a >> b;
+        a--;b--;
+        roads.unite(a,b);
     }
-    return 0;
+    REP(i,L){
+        int a,b;cin >> a >> b;
+        a--;b--;
+        trains.unite(a,b);
+    }
+    map<P,int> ans;
+    REP(i,N){
+        ans[make_pair(roads.root(i),trains.root(i))]++;
+    }
+    REP(i,N){
+        cout << ans[make_pair(roads.root(i),trains.root(i))] << " ";
+    }
 }
-//https://atcoder.jp/contests/atc001/tasks/unionfind_a
