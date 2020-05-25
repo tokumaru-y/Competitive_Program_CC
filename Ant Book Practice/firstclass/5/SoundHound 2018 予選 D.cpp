@@ -25,3 +25,4 @@ vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
 }
+//https://atcoder.jp/contests/soundhound2018-summer-qual/tasks/soundhound2018_summer_qual_d

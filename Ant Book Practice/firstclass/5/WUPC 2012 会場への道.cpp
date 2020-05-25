@@ -24,4 +24,6 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
+
 }
+//https://atcoder.jp/contests/wupc2012-closed/tasks/wupc2012_5

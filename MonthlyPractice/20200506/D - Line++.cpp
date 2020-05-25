@@ -24,4 +24,17 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
+    int n,x,y;cin >> n >> x >> y;
+    x--;y--;
+    vector<int> ans(n,0);
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            int dis=min({j-i,abs(j-x)+abs(i-y)+1,abs(j-y)+abs(i-x)+1});
+            ans[dis]++;
+        }
+    }
+    FOR(i,1,n){
+        cout << ans[i] << endl;
+    }
 }
+//https://atcoder.jp/contests/abc160/tasks/abc160_d
