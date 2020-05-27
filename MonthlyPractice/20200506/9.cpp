@@ -24,21 +24,15 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    ll n;cin >> n;
-    vector<vector<int>> paircnt(10,vector<int>(10,0));
-    for(ll i=1;i<=n;i++){
-        int keta = to_string(i).length();
-        ll basenum=1;ll cnt=1;
-        while(cnt<keta){
-            basenum*=10;
-            cnt++;
-        }
-        int first=(keta==1)?i:(i/basenum);int last=(keta==1)?i:(i%10);
-        paircnt[first][last]++;
-    }
+    ll n ; cin >> n;
+    ll cnt = 10;
     ll ans = 0;
-    FOR(i,1,10)FOR(j,1,10){
-        ans+=paircnt[i][j]*paircnt[j][i];
+    if(n%2==1){
+        cout << 0 << endl;return 0;
+    }
+    while(n>=cnt){
+        ans+= n/cnt;
+        cnt *= 5;
     }
     cout << ans << endl;
-}//https://atcoder.jp/contests/abc152/tasks/abc152_d
+}//https://atcoder.jp/contests/abc148/tasks/abc148_e
