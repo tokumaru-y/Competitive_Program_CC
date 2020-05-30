@@ -24,15 +24,17 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    ll a,b,c,k;cin >> a >> b >> c >> k;
-    if(a>=k){
-        cout << k << endl;
+    int k;cin >> k;
+    string s; cin >> s;
+    int l=s.length();l;
+    if(l<=k){
+        cout << s << endl;
     } else {
-        ll need=k-a;
-        if(need>b){
-            cout << a + (need-b)*(-1) << endl; 
-        } else {
-            cout << a << endl;
+        int c=0;
+        while(c<=k-1){
+            printf("%c",s[c]);
+            c++;
         }
+        cout << "..." << endl;
     }
 }

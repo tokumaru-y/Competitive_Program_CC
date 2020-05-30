@@ -24,17 +24,19 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    int k;cin >> k;
-    string s; cin >> s;
-    int l=s.length();l;
-    if(l<=k){
-        cout << s << endl;
-    } else {
-        int c=0;
-        while(c<=k-1){
-            printf("%c",s[c]);
-            c++;
+    string s;cin >> s;
+    char ans[2*100000];
+    int le = s.length();
+    bool flag = false;
+    REP(i,le){
+        if(s[i]=='?'){
+            ans[i]='D';
+        } else {
+            ans[i]=s[i];
         }
-        cout << "..." << endl;
     }
+    REP(i,le){
+        cout << ans[i];
+    }
+    cout << endl;
 }

@@ -22,40 +22,43 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
-vector<ll> graph;
-vector<ll> start;vector<ll> finish;
-vector<ll> roots;
-ll ans ;
-ll roopcnt;ll startcnt;
-void dfs(int x,int cnt) {
-    ll nx = graph[x];
-    start[x]=cnt;
-    cnt++;
-    if(start[nx]>=0 && finish[nx]==-1){
-        startcnt=start[nx];
-        roopcnt=cnt - start[nx];
-        finish[nx]=cnt+1;
-        return;
-    }
-    roots.push_back(nx);
-    dfs(nx,cnt);
-    cnt++;
-    finish[x]=cnt;
-}
 
 signed main () {
-    ll n,k;cin >> n >> k;
-    graph.resize(n);
-    start.assign(n,-1);finish.assign(n,-1);
-    REP(i,n){int tmp;cin >> tmp;graph[i]=tmp-1;}
-    roots.push_back(0);
-    dfs(0,0);
-    if(startcnt>=k){
-        ans = roots[k]+1;
-    } else {
-        ll left = k - (startcnt);
-        ll ind = left%roopcnt;
-        ans = roots[startcnt+ind]+1;
+    int n,m;cin >> n >> m;
+    vector<vector<int>> trees(n,vector<int>());
+    REP(i,m){
+        int a,b;
+        cin >> a >> b;
+        a--;b--;
+        trees[a].push_back(b);
+        trees[b].push_back(a);
     }
-    cout << ans << endl;
+    vector<int> ans(n);
+    priority_queue<P,vector<P>,greater<P>> que;
+    vector<bool> seen(n,false);
+    seen[0]=true;
+    for(int next : trees[0]){
+        que.push(P(1,next));
+        ans[next]=1;
+        seen[next]=true;
+    }
+    while(!que.empty()){
+        P tmp = que.top();que.pop();
+        int cnt = tmp.first;int origin=tmp.second;
+        for(int next : trees[origin]){
+            if(!seen[next]){
+                que.push(P(cnt+1,next));
+                ans[next]=origin+1;
+                seen[next]=true;
+            }
+        }
+    }
+    if(count(ALL(seen),false)>0){
+        cout << "No" << endl;
+    } else {
+        cout << "Yes" << endl;
+        FOR(i,1,n){
+            cout << ans[i] << endl;
+        }
+    }
 }
