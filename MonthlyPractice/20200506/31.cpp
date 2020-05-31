@@ -22,8 +22,20 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
+ll GCD(ll x, ll y){
+    if(x<y)swap(x,y);
+    if(y==0)return x;
+    return GCD(y,x%y);
+}
 
 signed main () {
-    ll a,b;cin >> a >>b;
-    cout << a*b << endl;
-}//
+    int n;ll k;cin >> n >> k;
+    ll maxnum = 0; ll gcd = 0;
+    REP(i,n){
+        ll tmp;cin >> tmp;
+        maxnum = max(tmp,maxnum);
+        gcd = GCD(gcd,tmp);
+    }
+    if(k <= maxnum && k % gcd == 0)cout << "POSSIBLE" << endl;
+    else cout << "IMPOSSIBLE" << endl;
+}//https://atcoder.jp/contests/agc018/tasks/agc018_a

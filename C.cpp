@@ -22,47 +22,9 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
-vector<ll> deepth;
-ll ans = 0;
 
 signed main () {
-    int n;cin >> n;n++;
-    deepth.resize(n);
-    vector<ll> maxdeepth(n);
-    ll cnt = 1;
-    REP(i,n){
-        ll tmp ;cin >> tmp;
-        if(i==0&&tmp!=0){
-            cout << -1 << endl; return 0;
-        }
-        deepth[i]=tmp;
-        maxdeepth[i]=cnt;
-        cnt*=2;
-    }
-    ll ans = 0;ll pre = 0 ;
-    for(int i=n-1;i>=0;i--){
-        if(maxdeepth[i]<deepth[i]){
-            cout << -1 << endl;return 0;
-        }
-        if(i==n-1)ans+=deepth[i],pre=deepth[i];
-        else if(i==0)ans++;
-        else {
-            if(deepth[i]==0)ans+=pre;
-            else{
-                ll mina=deepth[i]+ceil(pre/2);
-                if(pre%2==0)mina--;
-                pre=mina+deepth[i];
-                ans += mina + deepth[i];
-            }
-/*             ll canma = deepth[i+1]+(ll)ceil(deepth[i]/2);
-            ll upcan = (maxdeepth[i-1]-deepth[i-1])*2;
-            cout << canma << endl;
-            if(canma>upcan){
-                cout << -1 << endl;return 0;
-            } else {
-                ans+=canma;
-            }
- */        }
-    }
+    ll a;double b;cin >> a >> b;
+    ll ans = floor(a*b);
     cout << ans << endl;
 }

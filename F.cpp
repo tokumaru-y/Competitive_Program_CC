@@ -24,6 +24,4 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    ll a,b;cin >> a >>b;
-    cout << a*b << endl;
-}//
+}

@@ -22,28 +22,47 @@ vector<long long> divisor(long long n) {
     return ret;
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
-typedef long double ld;
-const ld eps = 1.0e-9; // 許容される誤差
-double mysqrtl(ld x)
-{
-  ld a = sqrt((double)x); // 近似値
-  do {
-    a = (a + x/a) / 2.0L;
-  } while (fabsl(x - a*a) > eps);
-  return a;
-}
+vector<ll> deepth;
+ll ans = 0;
+
 signed main () {
-    static const double pi = 3.1415926535897932;
-    float x,y,h,m; cin >> x >> y >> h >> m ;
-    double xx =6.0*m;
-    double yy =(0.50*m)+(30.0*h);
-    if(xx==0)xx=360.0;
-    if(yy==0)yy=360.0;
-    double diff =xx<yy?yy-xx:xx-yy;
-    double ans = pow(x,2.0) + pow(y,2.0) -2*x*y*(cos(M_PI*(diff/180.0)));
-    if(h==m){
-        cout << abs(x-y) << endl;
-        exit(0);
+    int n;cin >> n;n++;
+    deepth.resize(n);
+    vector<ll> maxdeepth(n);
+    ll cnt = 1;
+    REP(i,n){
+        ll tmp ;cin >> tmp;
+        if(i==0&&tmp!=0){
+            cout << -1 << endl; return 0;
+        }
+        deepth[i]=tmp;
+        maxdeepth[i]=cnt;
+        cnt*=2;
     }
-    printf("%.10lf\n",mysqrtl(ans));
+    ll ans = 0;ll pre = 0 ;
+    for(int i=n-1;i>=0;i--){
+        if(maxdeepth[i]<deepth[i]){
+            cout << -1 << endl;return 0;
+        }
+        if(i==n-1)ans+=deepth[i],pre=deepth[i];
+        else if(i==0)ans++;
+        else {
+            if(deepth[i]==0)ans+=pre;
+            else{
+                ll mina=deepth[i]+ceil(pre/2);
+                if(pre%2==0)mina--;
+                pre=mina+deepth[i];
+                ans += mina + deepth[i];
+            }
+/*             ll canma = deepth[i+1]+(ll)ceil(deepth[i]/2);
+            ll upcan = (maxdeepth[i-1]-deepth[i-1])*2;
+            cout << canma << endl;
+            if(canma>upcan){
+                cout << -1 << endl;return 0;
+            } else {
+                ans+=canma;
+            }
+ */        }
+    }
+    cout << ans << endl;
 }

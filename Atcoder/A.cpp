@@ -24,13 +24,9 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    string s ;cin >> s;
-    int l=s.length();l--;
-    if(s[l]=='0' || s[l]=='6' || s[l]=='8' || s[l]=='1'){
-        cout << "pon" << endl;
-    } else if (s[l]=='3'){
-        cout << "bon" << endl;
-    } else {
-        cout << "hon" << endl;
-    }
+    int a,b,c,d,e;cin >> a >> b >> c >> d >> e;
+    int s=a*60+b;int t=c*60+d;
+    int ans = t-s-e;
+    if(ans<0)ans =0;
+    cout << ans << endl;
 }
