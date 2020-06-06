@@ -25,14 +25,16 @@ vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
     int n;cin >> n;
-    vector<int> inlist(100000,0);
+    map<ll,int> cntmap;
     REP(i,n){
-        int tmp;cin >> tmp;
-        inlist[tmp-1]++;
+        ll tmp;cin >> tmp;
+        cntmap[tmp]++;
     }
-    int ans = n;
-    for(int num : inlist){
-        if(num>=2)ans-=num;
+    int evencnt=0;int ans=0;
+    for(auto cn : cntmap){
+        if(cn.second%2==0)evencnt++;
+        ans++;
     }
+    if(evencnt%2==1)ans--;
     cout << ans << endl;
 }//https://atcoder.jp/contests/arc068/tasks/arc068_b
