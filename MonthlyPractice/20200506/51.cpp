@@ -25,29 +25,25 @@ vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
     int n;cin >> n;
-    int ans = 0;bool flag = true;int pre = 0;
-    int tmpsum = 0;
-    REP(i,n){
-        int tmp;cin >> tmp;
-        if(pre==tmp){
-            ans = max(ans,tmpsum);
-            pre = tmp;
-            flag = true;
-            tmpsum=1;
-            continue;
-        }
-        if(flag){
-            if(pre>tmp)flag=false;
-            tmpsum++;pre=tmp;
-        } else {
-            if(pre<tmp){
-                flag=true;
-                ans=max(ans,tmpsum);
-                tmpsum=1;
-            }else{
-                tmpsum++;
+    vector<ll> h(n);
+    REP(i,n)cin >> h[i];
+    ll ans = 0;
+    REP(middle,n){
+        if(middle==0 || middle==n-1){
+            if(middle==0){
+                ll l = 0 ;
+                while(h[l] > h[l+1] && l < n-1)l++;
+                ans = max(ans,l - middle+1);
+            } else{
+                ll r = middle;
+                while(h[r]>h[r-1] && r > 0)r--;
+                ans = max(ans, middle-r+1);
             }
-            pre=tmp;
+        } else if(h[middle-1]<h[middle] && h[middle]>h[middle+1]){
+            ll r=middle;ll l=middle;
+            while(h[r]>h[r-1] && r > 0 )r--;
+            while(h[l]>h[l+1] && l < n-1)l++;
+            ans = max(ans, l - r + 1);
         }
     }
     cout << ans << endl;
