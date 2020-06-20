@@ -25,20 +25,22 @@ vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
     vector<int> list(10);
+    vector<int> rev(10);
     REP(i,10){
         int intmp;cin >> intmp;
         list[i]=intmp;
+        rev[intmp]=i;
     }
     int n;cin >> n;
-    vector<ll> num(n);
-    REP(i,n)cin >> num[i];
+    vector<ll> num;
+    REP(i,n){
+        string tmp;cin >> tmp;
+        char c[tmp.length()];
+        
+        num.push_back(list[i]);
+    }
     sort(ALL(num));
     REP(i,n){
-        string tmp=to_string(num[i]);
-        for(char a : tmp){
-            int aa = a - '0';
-            cout << list[aa];
-        }
-        cout << endl;
+        cout << rev[num[i]] << endl;
     }
 }//https://atcoder.jp/contests/arc009/tasks/arc009_2
