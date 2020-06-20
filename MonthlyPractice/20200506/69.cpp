@@ -25,20 +25,20 @@ vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
     string s;cin >> s;
-    int lens=s.length();
-    bool c[5]={false,false,false,false,false};
-    int checked=0;
-    int minnum=10000000;
-    vector<string>ans;
-    map<int,vector<string>> anslist;
-    REP(i,5){
+    ll lens=s.length();
+    // bool c[5]={false,false,false,false,false};
+    ll minnum=INF;
+    vector<string> anslist;
+    vector<string> ans;
+    REP(i,4){
+        int checked=0;
         char target;
         if(i==0)target='S';
         else if(i==1)target='H';
         else if(i==2)target='D';
         else if(i==3)target='C';
-        else target='A';
         ll index = 0;
+        ans.clear();
         while(index<lens){
             string tmp = "";
             tmp+=s[index];
@@ -47,22 +47,27 @@ signed main () {
                     tmp+=s[index+1];
                     tmp+=s[index+2];
                     index+=3;
-                    if(c[0])ans.push_back(tmp);
-                    else c[0]=true,checked++;
+                    checked++;
+                    // if(c[0])ans.push_back(tmp);
+                    // else c[0]=true,checked++;
                 } else {
                     tmp+=s[index+1];
                     if(s[index+1]=='Q'){
-                        if(c[1])ans.push_back(tmp);
-                        else c[1]=true,checked++;
+                        checked++;
+                        // if(c[1])ans.push_back(tmp);
+                        // else c[1]=true,checked++;
                     } else if(s[index+1]=='J'){
-                        if(c[2])ans.push_back(tmp);
-                        else c[2]=true,checked++;
+                        checked++;
+                        // if(c[2])ans.push_back(tmp);
+                        // else c[2]=true,checked++;
                     } else if(s[index+1]=='K'){
-                        if(c[3])ans.push_back(tmp);
-                        else c[3]=true,checked++;
+                        checked++;
+                        // if(c[3])ans.push_back(tmp);
+                        // else c[3]=true,checked++;
                     } else if(s[index+1]=='A'){
-                        if(c[4])ans.push_back(tmp);
-                        else c[4]=true,checked++;
+                        checked++;
+                        // if(c[4])ans.push_back(tmp);
+                        // else c[4]=true,checked++;
                     } else {
                         ans.push_back(tmp);
                     }
@@ -80,9 +85,11 @@ signed main () {
                 ans.push_back(tmp);
             }
             if(checked==5){
-                int checkedlens = ans.size();
-                minnum=min(minnum,checkedlens);
-                anslist[checkedlens]=ans;
+                ll checkedlens = ans.size();
+                if(checkedlens<minnum){
+                    minnum=min(minnum,checkedlens);
+                    anslist=ans;
+                }
                 break;
             }
         }
@@ -90,10 +97,10 @@ signed main () {
     if(minnum==0){
         cout << 0 << endl;
     } else {
-        for(string aaa : anslist[minnum]){
+        for(string aaa : anslist){
             cout << aaa;
         }
         cout << endl;
+        return 0;
     }
-    return 0;
 }//https://atcoder.jp/contests/tenka1-2012-qualC/tasks/tenka1_2012_10
