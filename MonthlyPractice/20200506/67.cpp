@@ -33,27 +33,27 @@ signed main () {
     }
     int n;cin >> n;
     vector<ll> numlist;
-    map<ll,ll> allo{};
+    map<ll,string> anslist;
     REP(i,n){
-        ll nb; cin >> nb;
-        string tmp = to_string(nb);
-        ll instr =0;
+        string tmp ;cin >> tmp;
         ll lens=tmp.length();
-        ll ten = 1;ll cnt =1;
-        while(cnt<lens){
-            ten*=10;cnt++;
+        ll instr = 0;
+        ll k = 1;ll ketacnt = 0;
+        while(ketacnt<lens){
+            k*=10;
+            ketacnt++;
         }
-        REP(j,lens){
-            int a=tmp[j]-'0';
-            int b=order[a];
-            instr+=b*ten;
-            ten/=10;
+        REP(a,lens){
+            int aa = tmp[a]-'0';
+            int aaa = rev[aa];
+            instr+=aaa*k;
+            k/=10;
         }
-        allo[instr]=nb;
+        anslist[instr]=tmp;
         numlist.push_back(instr);
     }
     sort(ALL(numlist));
     REP(i,n){
-        cout << allo[numlist[i]] << endl;
+        cout << anslist[numlist[i]] << endl;
     }
 }//https://atcoder.jp/contests/arc009/tasks/arc009_2
