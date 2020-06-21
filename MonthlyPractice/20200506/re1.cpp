@@ -24,24 +24,4 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    ll needred,needblue,red,blue,none;cin >> needred >> needblue >> red >> blue >> none;
-    vector<ll> reds(red);vector<ll> blues(blue);vector<ll> nones(none);
-    REP(i,red)cin >> reds[i];
-    REP(i,blue)cin >> blues[i];
-    REP(i,none)cin >> nones[i];
-    sort(ALL(reds),greater<ll>());
-    sort(ALL(blues),greater<ll>());
-    sort(ALL(nones),greater<ll>());
-    vector<ll> ans;
-    REP(i,needred)ans.push_back(reds[i]);
-    REP(i,needblue)ans.push_back(blues[i]);
-    sort(ALL(ans));
-    auto noneitr = nones.begin();
-    REP(i,needred+needblue){
-        if(ans[i]>=*noneitr)break;
-        ans[i]=*noneitr;
-        ++noneitr;
-    }
-    cout << accumulate(ALL(ans),0LL) << endl;
-}
-//https://atcoder.jp/contests/abc160/tasks/abc160_e
+}//https://atcoder.jp/contests/abc166/tasks/abc166_e
