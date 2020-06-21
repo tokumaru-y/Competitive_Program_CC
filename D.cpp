@@ -24,4 +24,23 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
+    int n;cin >> n;
+    ll ans = 0;
+    vector<int>list(n);
+    map<int ,int > cnt;
+    REP(i,n){
+        int tmp ;cin >> tmp;
+        list[i]=tmp;
+        cnt[tmp]++;
+        ans+=tmp;
+    }
+    int q;cin >> q;
+    REP(i,q){
+        int a,b;cin >> a >> b;
+        ll diff = (b-a)*(cnt[a]);
+        cnt[b]+=cnt[a];
+        cnt[a]=0;
+        ans+=diff;
+        cout << ans << endl;
+    }
 }

@@ -7,24 +7,13 @@ typedef long long ll;
 using namespace std;
 
 signed main () {
-    ll n;cin >> n;
-    ll ans = 1;
-    ll limit = 1e+18;
-    vector<ll> inlist(n);
-    REP(i,n){
-        ll tmp;cin >> tmp;
-        inlist[i]=tmp;
-        if(tmp==0){
-            cout << 0 << endl;
-            return 0;
-        }
-    }
-    for(ll a : inlist){
-        if(ans<=limit/a){
-            ans *=a;
-        } else {
-            cout << -1 << endl;return 0;
-        }
+    int n,m;cin >> n >> m;
+    vector<ll> list(n);
+    REP(i,n)cin >> list[i];
+    sort(ALL(list));
+    ll ans=0;
+    REP(i,m){
+        ans+=list[i];
     }
     cout << ans << endl;
 }
