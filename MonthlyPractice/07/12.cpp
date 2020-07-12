@@ -24,4 +24,31 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-}
+    ll n,m,k;cin >> n >> m >> k;
+    vector<ll> alist(n+1,0);
+    vector<ll> blist(m+1,0);
+    REP(i,n){
+        ll tmp;cin >> tmp;
+        alist[i+1]=alist[i]+tmp;
+    }
+    REP(i,m){
+        ll tmp;cin >> tmp;
+        blist[i+1]=blist[i]+tmp;
+    }
+    ll ans = 0;
+    FOR(i,1,n+1){
+        ll target=alist[i];
+        if(k-target<0)continue;
+        auto bitr=upper_bound(ALL(blist),k-target);
+        ll it=bitr - blist.begin()-1;
+        ans=max(ans,(ll)i+it);
+    }
+    FOR(i,1,m+1){
+        ll target=blist[i];
+        if(k-target<0)continue;
+        auto aitr=upper_bound(ALL(alist),k-target);
+        ll it=aitr-alist.begin()-1;
+        ans=max(ans,(ll)i+it);
+    }
+    cout << ans << endl;
+}//https://atcoder.jp/contests/abc172/tasks/abc172_c
