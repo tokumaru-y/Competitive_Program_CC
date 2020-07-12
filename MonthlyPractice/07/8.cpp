@@ -24,94 +24,6 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    // ll n,m;cin >> n >> m;
-    // vector<ll> pluss;
-    // vector<ll> minuss;
-    // REP(i,n){
-    //     ll tmp;cin >> tmp;
-    //     if(tmp>0)pluss.push_back(tmp);
-    //     else minuss.push_back(tmp);
-    // }
-    // sort(ALL(pluss),greater<ll>());
-    // sort(ALL(minuss),greater<ll>());
-    // ll p_size = pluss.size();
-    // ll m_size = minuss.size();
-    // ll ans = 1;
-    // ll indexp = 0;
-    // ll indexm = 0;
-    // if(m%2==0){
-    //     while(m>0){
-    //         bool use_plus = (indexp<p_size-1)?true:false;
-    //         bool use_minus = (indexm<m_size-1)?true:false;
-    //         if(use_plus && use_minus){
-    //             if(pluss[indexp] * pluss[indexp+1] > minuss[indexm] * minuss[indexm+1]){
-    //                 ans *= pluss[indexp] % MOD * pluss[indexp+1] % MOD;
-    //                 ans %= MOD;
-    //                 indexp += 2;
-    //             } else {
-    //                 ans *=  minuss[indexm]% MOD * minuss[indexm+1] % MOD;
-    //                 ans %= MOD;
-    //                 indexm += 2;
-    //             }
-    //         } else if (use_plus){
-    //             ans *= pluss[indexp] % MOD * pluss[indexp+1] % MOD;
-    //             ans %= MOD;
-    //             indexp += 2;
-    //         } else if (use_minus) {
-    //             ans *=  minuss[indexm]% MOD * minuss[indexm+1] % MOD;
-    //             ans %= MOD;
-    //             indexm += 2;
-    //         } else {
-    //             ans *= pluss[indexp] % MOD * minuss[indexm] % MOD;
-    //             indexp+=1;indexm+=1;
-    //         }
-    //         m-=2;
-    //     }
-    // } else {
-    //     while(m>0){
-    //         if(m==1){
-    //             if(indexp<=p_size-1){
-    //                 ans *= pluss[indexp]%MOD;
-    //                 indexp+=1;
-    //                 m--;
-    //             } else {
-    //                 ans *= minuss[indexm]%MOD;
-    //                 indexm+=1;
-    //                 m--;
-    //             }
-    //         } else {
-    //             bool use_plus = (indexp<p_size-1)?true:false;
-    //             bool use_minus = (indexm<m_size-1)?true:false;
-    //             if(use_plus && use_minus){
-    //                 if(pluss[indexp] * pluss[indexp+1] > minuss[indexm] * minuss[indexm+1]){
-    //                     ans *= pluss[indexp] % MOD * pluss[indexp+1] % MOD;
-    //                     ans %= MOD;
-    //                     indexp += 2;
-    //                 } else {
-    //                     ans *=  minuss[indexm]% MOD * minuss[indexm+1] % MOD;
-    //                     ans %= MOD;
-    //                     indexm += 2;
-    //                 }
-    //             } else if (use_plus){
-    //                 ans *= pluss[indexp] % MOD * pluss[indexp+1] % MOD;
-    //                 ans %= MOD;
-    //                 indexp += 2;
-    //             } else if (use_minus) {
-    //                 ans *=  minuss[indexm]% MOD * minuss[indexm+1] % MOD;
-    //                 ans %= MOD;
-    //                 indexm += 2;
-    //             } else {
-    //                 ans *= pluss[indexp] % MOD * minuss[indexm] % MOD;
-    //                 indexp+=1;indexm+=1;
-    //             }
-    //             m-=2;
-    //         }
-    //     }
-    // }
-    // if(ans<0){
-    //     ans = MOD + ans;
-    // }
-    // cout << ans << endl;
     ll n,m;cin >> n >> m;
     vector<ll> positive;
     vector<ll> negative;
@@ -192,12 +104,6 @@ signed main () {
                     negindex+=2;
                     m-=2;
                 }
-                // } else {
-                //     ll tmp = (positive[posindex] * negative[negindex]) % MOD; 
-                //     ans *= tmp;
-                //     ans %= MOD;
-                //     posindex++;negindex++;
-                // }
             }
         }
     }
