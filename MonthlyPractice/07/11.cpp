@@ -24,4 +24,11 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-}
+    string a,b;cin >> a >> b;
+    int ans = 0;
+    int leng = a.size();
+    REP(i,leng){
+        if(a[i]!=b[i])ans++;
+    }
+    cout << ans << endl;
+}//https://atcoder.jp/contests/abc172/tasks/abc172_b
