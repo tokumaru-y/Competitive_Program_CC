@@ -23,5 +23,17 @@ vector<long long> divisor(long long n) {
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
-signed main () {
+ll calc(ll n,ll t){
+    ll x=n/t;
+    return x*(x+1)/2;
 }
+
+signed main () {
+    ll n;cin >> n;
+    ll ans = 0;
+    for(ll i=1;i<=n;i++){
+        ll tmp = i*calc(n,i);
+        ans+=tmp;
+    }
+    cout << ans << endl;
+}//https://atcoder.jp/contests/abc172/tasks/abc172_d
