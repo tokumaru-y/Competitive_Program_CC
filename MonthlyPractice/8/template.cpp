@@ -24,14 +24,4 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-    string weather;cin >> weather;
-    int ans = 0;
-    if(weather[1]=='R'){
-        if(weather[0]=='R' && weather[2]=='R')ans=3;
-        else if(weather[0]=='R' || weather[2]=='R')ans=2;
-        else ans = 1;
-    } else {
-        if(weather[0]=='R' || weather[2]=='R')ans=1;
-    }
-    cout << ans << endl;
-}//https://atcoder.jp/contests/abc175/tasks/abc175_a
+}
