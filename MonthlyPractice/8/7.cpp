@@ -24,4 +24,16 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-}
+    ll n;cin >> n;
+    vector<ll> inlist(n);
+    REP(i,n)cin >> inlist[i];
+    ll ans = 0;
+    FOR(i,1,n){
+        ll dif = inlist[i-1] - inlist[i]; 
+        if(dif>0){
+            ans+=dif;
+            inlist[i]=inlist[i-1];
+        }
+    }
+    cout << ans << endl;
+}//https://atcoder.jp/contests/abc176/tasks/abc176_c
