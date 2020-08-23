@@ -24,4 +24,16 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-}
+    ll n;cin >> n;
+    vector<ll> hen(n);
+    REP(i,n)cin >> hen[i];
+    ll ans=0;
+    REP(i,n)FOR(j,i+1,n)FOR(k,j+1,n){
+        if(hen[i] == hen[j] || hen[j] == hen[k] || hen[k] == hen[i])continue;
+        ll x=hen[i]+hen[j];
+        ll y=hen[j]+hen[k];
+        ll z=hen[k]+hen[i];
+        if(hen[i]<y && hen[j] < z && hen[k]<x)ans++;
+    }
+    cout << ans << endl;
+}//https://atcoder.jp/contests/abc175/tasks/abc175_b
