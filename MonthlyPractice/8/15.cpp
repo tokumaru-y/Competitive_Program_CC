@@ -23,5 +23,46 @@ vector<long long> divisor(long long n) {
 }
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
+struct UF {
+    vector<int>par;
+    vector<int>cnt;
+    UF(int x) : par(x),cnt(x){
+        REP(i,x)par[i]=i,cnt[i]=1;
+    }
+    int root(int x){
+        if(par[x]==x)return x;
+        return par[x]=root(par[x]);
+    }
+    bool same(int x,int y){
+        return root(x) == root(y);
+    }
+    void unite(int x,int y){
+        if(x>y)swap(x,y);
+        int rx = root(x);
+        int ry = root(y);
+        if(rx==ry)return ;
+        par[ry] = rx;
+        cnt[rx] += cnt[ry];
+    }
+    int deepth(int x){
+        return cnt[x];
+    }
+};
+
 signed main () {
-}
+    int n,m;
+    cin >> n >> m;
+    UF tree(n);
+    REP(i,m){
+        int a,b;cin >> a >> b;
+        a--;b--;
+        tree.unite(a,b);
+    }
+    int ans=0;
+    REP(i,n){
+        int ri = tree.root(i);
+        int deep = tree.deepth(ri);
+        ans=max(ans,deep);
+    }
+    cout << ans << endl;
+}//https://atcoder.jp/contests/abc177/tasks/abc177_d
