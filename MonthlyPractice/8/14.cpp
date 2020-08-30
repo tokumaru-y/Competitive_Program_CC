@@ -24,4 +24,16 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-}
+    ll n,m;cin >> n >> m;
+    vector<int> coins(m);
+    REP(i,m)cin >> coins[i];
+    vector<ll> dp(50001,1000000);
+    dp[0]=0;
+    REP(i,50001){
+        REP(j,m){
+            if(i+coins[j]>50000)continue;
+            dp[i+coins[j]] = min(dp[i+coins[j]],dp[i]+1);
+        }
+    }
+    cout << dp[n] << endl;
+}//http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_1_A&lang=jp
