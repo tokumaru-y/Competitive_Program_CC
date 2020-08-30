@@ -24,4 +24,15 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-}
+    int n;cin >> n;
+    n = 1000-n;
+    int ans = 0;
+    int coins[6] = {500,100,50,10,5,1};
+    REP(i,6){
+        int tmp = n/coins[i];
+        n -= coins[i]*tmp;
+        ans += tmp;
+        if(!n)break;
+    }
+    cout << ans << endl;
+}//https://atcoder.jp/contests/joi2008yo/tasks/joi2008yo_a
