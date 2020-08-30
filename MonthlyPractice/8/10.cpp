@@ -24,4 +24,8 @@ vector<long long> divisor(long long n) {
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
-}
+    ll a,b,c;cin >> a >> b >> c;
+    ll s = b*c;
+    if(a<=s)cout << "Yes" << endl;
+    else cout << "No" << endl;
+}//https://atcoder.jp/contests/abc177/tasks/abc177_a
