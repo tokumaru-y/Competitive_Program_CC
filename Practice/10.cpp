@@ -1,3 +1,4 @@
+// https://atcoder.jp/contests/abc051/tasks/abc051_b
 #include <bits/stdc++.h>
 #define FOR(i,a,b) for(int i=(a);i<(b);i++)
 #define REP(i,n) for(int i=0;i < (n);i++)
@@ -12,4 +13,12 @@ const int MOD = (int)1e9 + 7;
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
+    int K,S;
+    cin >> K >> S;
+    int ans = 0;
+    REP(i,K+1)REP(j,K+1){
+        if (i+j>S || S-i-j>K)continue;
+        ans++;
+    }
+    cout << ans << endl;
 }
