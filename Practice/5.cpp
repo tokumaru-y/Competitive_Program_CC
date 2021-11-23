@@ -1,3 +1,4 @@
+// https://atcoder.jp/contests/code-festival-2014-final/tasks/code_festival_final_d
 #include <bits/stdc++.h>
 #define FOR(i,a,b) for(int i=(a);i<(b);i++)
 #define REP(i,n) for(int i=0;i < (n);i++)
@@ -12,4 +13,7 @@ const int MOD = (int)1e9 + 7;
 vector<int> dx={1,0,-1,0};vector<int> dy={0,-1,0,1};
 
 signed main () {
+    ll N;
+    cin >> N;
+    cout << N+1 << " " << 2 << endl;
 }
