@@ -1,5 +1,9 @@
 {
     "files.autoSave": "afterDelay",
     "files.eol": "\n",
-    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe"
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    }
 }
